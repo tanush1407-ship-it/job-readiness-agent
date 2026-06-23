@@ -14,6 +14,8 @@ def start_agent():
     
     domain = input("What domain are you interested in? (e.g. Python, Web Development, Data Science): ")
     location = input("Which city are you looking for jobs in? (e.g. Mumbai, Bangalore, Delhi): ")
+    skill_level = input("What is your current skill level? (Beginner/Intermediate/Advanced): ")
+    interests = input("What excites you most about this field?: ")
     jobs = fetch_jobs(domain, location)
     init_db()
     save_search(domain, location, jobs)
