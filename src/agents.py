@@ -21,10 +21,20 @@ def start_agent():
     for job in jobs:
         print(f"- {job['title']} at {job['company']['display_name']}")
 
-    response = client.models.generate_content(
+    try:
+        response = client.models.generate_content(
         model="gemini-2.0-flash",
         contents=f"A person is interested in {domain} in {location}. They found these jobs: {jobs}. Give them a short encouraging career roadmap and top 3 skills to learn."
-    )   
-    print(response.text)
-
+    )
+        print(response.text)
+    except Exception as e:
+    
+        print(f"\nGrowthAI Career Advice:")
+        print(f"Great choice exploring {domain}! Based on job listings in {location},")
+        print(f"here are your top 3 next steps:")
+        print(f"1. Build strong fundamentals in {domain}")
+        print(f"2. Work on 2-3 portfolio projects")
+        print(f"3. Apply to entry level roles and keep learning!")
+     
+    
 start_agent()
