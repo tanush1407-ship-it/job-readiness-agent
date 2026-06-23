@@ -1,3 +1,4 @@
+from database import init_db, save_search
 import requests
 from google import genai
 from dotenv import load_dotenv
@@ -14,13 +15,15 @@ def start_agent():
     domain = input("What domain are you interested in? (e.g. Python, Web Development, Data Science): ")
     location = input("Which city are you looking for jobs in? (e.g. Mumbai, Bangalore, Delhi): ")
     jobs = fetch_jobs(domain, location)
+    init_db()
+    save_search(domain, location, jobs)
     print(f"\nFound {len(jobs)} jobs for {domain} in {location}:")
     for job in jobs:
         print(f"- {job['title']} at {job['company']['display_name']}")
 
     response = client.models.generate_content(
         model="gemini-2.0-flash",
-        contents=f"A person is interested in {domain}..."
+        contents=f"A person is interested in {domain} in {location}. They found these jobs: {jobs}. Give them a short encouraging career roadmap and top 3 skills to learn."
     )   
     print(response.text)
 
