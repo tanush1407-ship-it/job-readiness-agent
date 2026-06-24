@@ -16,6 +16,18 @@ def start_agent():
     location = input("Which city are you looking for jobs in? (e.g. Mumbai, Bangalore, Delhi): ")
     skill_level = input("What is your current skill level? (Beginner/Intermediate/Advanced): ")
     interests = input("What excites you most about this field?: ")
+
+
+    if not interests:
+        interests = "general growth and learning"
+    if "beg" in skill_level.lower():
+        skill_level = "Beginner"
+    elif "inter" in skill_level.lower():
+        skill_level = "Intermediate"
+    elif "adv" in skill_level.lower():
+        skill_level = "Advanced"
+
+        
     jobs = fetch_jobs(domain, location)
     init_db()
     save_search(domain, location, jobs)
@@ -26,17 +38,34 @@ def start_agent():
     try:
         response = client.models.generate_content(
         model="gemini-2.0-flash",
-        contents=f"A person is interested in {domain} in {location}. They found these jobs: {jobs}. Give them a short encouraging career roadmap and top 3 skills to learn."
-    )
+        contents=f"A person is interested in {domain} in {location}. Their skill level is {skill_level}. What excites them: {interests}. Jobs found: {jobs}. Based on their skill level, give them a personalized career roadmap and top 3 skills to learn. If beginner, focus on learning fundamentals first. If intermediate, focus on portfolio projects. If advanced, focus on senior roles."
+        )
         print(response.text)
+
     except Exception as e:
-    
-        print(f"\nGrowthAI Career Advice:")
-        print(f"Great choice exploring {domain}! Based on job listings in {location},")
-        print(f"here are your top 3 next steps:")
-        print(f"1. Build strong fundamentals in {domain}")
-        print(f"2. Work on 2-3 portfolio projects")
-        print(f"3. Apply to entry level roles and keep learning!")
-     
+            print(f"\nGrowthAI Career Advice for {skill_level} in {domain}:")
+
+            
+            
+    if skill_level == "Beginner":
+                print(f"Since you're just starting in {domain}, here's your roadmap:")
+                print(f"1. Learn the fundamentals of {domain} through free resources")
+                print(f"2. Build 1-2 small projects to practice")
+                print(f"3. Focus on {interests} to stay motivated")
+                print(f"4. Don't apply for jobs yet — build skills first!")
+                
+    elif skill_level == "Intermediate":
+                print(f"You're making good progress in {domain}!")
+                print(f"1. Build 2-3 strong portfolio projects")
+                print(f"2. Contribute to open source")
+                print(f"3. Start applying to junior roles")
+                print(f"4. Focus on {interests} to specialize!")
+                
+    else:
+                print(f"You're advanced in {domain} — time to level up!")
+                print(f"1. Apply for senior/mid-level roles")
+                print(f"2. Mentor others and build your network")
+                print(f"3. Specialize deeper in {interests}")
+        
     
 start_agent()
