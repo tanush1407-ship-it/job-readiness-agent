@@ -1,5 +1,5 @@
 from google.adk.agents import Agent
-from adzuna import fetch_jobs
+from growthAI.adzuna import fetch_jobs
 
 root_agent = Agent(
     model='gemini-2.0-flash',
