@@ -1,0 +1,8 @@
+venv/
+.env
+__pycache__/
+*.pyc
+google-cloud-sdk/
+.git/
+database/growthAI.db
+*.db

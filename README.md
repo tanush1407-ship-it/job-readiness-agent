@@ -50,3 +50,20 @@ job_readiness_agent/
 ├── database/          # SQLite storage
 ├── .env               # API keys (not shared)
 └── requirements.txt   # Dependencies
+
+## Deployment
+
+GrowthAI is deployed on Google Cloud Run:
+**Live URL:** https://growthai-531504296383.us-central1.run.app
+
+### To reproduce deployment:
+1. Install Google Cloud CLI
+2. Run `gcloud auth login`
+3. Run `gcloud config set project gen-lang-client-0363382067`
+4. Add API keys as environment variables:
+
+gcloud run services update growthai --region us-central1 
+
+--set-env-vars GEMINI_API_KEY=your_key,ADZUNA_APP_ID=your_id,ADZUNA_API_KEY=your_key
+
+5. Deploy: `gcloud run deploy growthai --source . --region us-central1 --allow-unauthenticated --port 8080`
