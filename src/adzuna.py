@@ -16,6 +16,8 @@ def fetch_jobs(domain, location):
         "where": location,
         "results_per_page": 5
     }
+    print(f"Status code: {response.status_code}")
+    print(f"Response text: {response.text[:200]}")
     response = requests.get(url, params=params)
     data = response.json()
     return data.get("results", [])

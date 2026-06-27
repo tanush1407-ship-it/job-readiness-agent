@@ -2,7 +2,7 @@ from google.adk.agents import Agent
 from growthAI.adzuna import fetch_jobs
 
 root_agent = Agent(
-    model='gemini-2.0-flash',
+    model='gemini-2.5-flash',
     name='GrowthAI',
     description='A career guidance agent that helps anyone grow professionally',
     instruction='''You are GrowthAI, a career guidance assistant. Your mission is to:

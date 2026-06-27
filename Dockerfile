@@ -13,4 +13,4 @@ ENV HOST=0.0.0.0
 
 EXPOSE 8080
 
-CMD ["adk", "web", "growthAI", "--port", "8080", "--host", "0.0.0.0", "--no-reload"]
+CMD ["adk", "web", "growthAI", "--port", "8080", "--host", "0.0.0.0", "--no-reload", "--allow_origins", "http://localhost:3000,http://127.0.0.1:3000,null"]
